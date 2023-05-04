@@ -56,7 +56,6 @@ echo '================================================================'
 echo 'export ANDROID_HOME=/data/data/com.termux/files/home/android-sdk/' >> ~/../usr/etc/profile
 echo 'export ANDROID_NDK_HOME=/data/data/com.termux/files/home/android-ndk-r23c/' >> ~/../usr/etc/profile
 echo 'export ANDROID_NDK_ROOT=$ANDROID_NDK_HOME' >> ~/../usr/etc/profile
-source ~/../usr/etc/profile
 
 
 echo '================================================================'
@@ -70,12 +69,14 @@ echo '================================================================'
 echo '                               install golang'
 echo '================================================================'
 pkg install golang
-
+cd ~ && mkdir go && mkdir go/bin
+echo 'export PATH=$PATH:/data/data/com.termux/files/home/go/bin/' >> ~/../usr/etc/profile
 
 echo '================================================================'
 echo '                               install fyne'
 echo '================================================================'
-... * soon
+cd ~ && git clone https://github.com/MatejMagat305/fyne.git && cd fyne && git checkout develop && cd cmd/fyne && go build && chmod 1777 fyne && mv fyne /data/data/com.termux/files/home/go/bin/ 
+# from origin fyne report soon
 
 
 echo '================================================================'
