@@ -1,5 +1,5 @@
 # fyne-termux
-Script for easy fetch ndk and sdk to compile apk with fyne
+Script for easy fetch ndk and sdk to compile apk with fyne: https://github.com/fyne-io/fyne
 # requirements
 - more than free 4.1GB on storage 
 - arm64 (unfortunately on arm32 doesn't exist ndk)
