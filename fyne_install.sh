@@ -75,7 +75,7 @@ echo 'export PATH=$PATH:/data/data/com.termux/files/home/go/bin/' >> ~/../usr/et
 echo '================================================================'
 echo '                               install fyne'
 echo '================================================================'
-cd ~ && git clone https://github.com/fyne-io/fyne.git && cd fyne && git checkout develop && cd cmd/fyne && go build && chmod 1777 fyne && mv fyne /data/data/com.termux/files/home/go/bin/
+cd ~ && git clone https://github.com/fyne-io/fyne.git && cd fyne && git checkout develop && cd cmd/fyne && go build && chmod 1777 fyne && mv fyne /data/data/com.termux/files/home/go/bin/ && cd ~ && rm -rf fyne
 
 echo '================================================================'
 echo '                                 complete'
