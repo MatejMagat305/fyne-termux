@@ -69,15 +69,13 @@ echo '================================================================'
 echo '                               install golang'
 echo '================================================================'
 pkg install golang
-cd ~ && mkdir go && mkdir go/bin
+cd ~ && mkdir -p go/bin
 echo 'export PATH=$PATH:/data/data/com.termux/files/home/go/bin/' >> ~/../usr/etc/profile
 
 echo '================================================================'
 echo '                               install fyne'
 echo '================================================================'
-cd ~ && git clone https://github.com/MatejMagat305/fyne.git && cd fyne && git checkout develop && cd cmd/fyne && go build && chmod 1777 fyne && mv fyne /data/data/com.termux/files/home/go/bin/ 
-# from origin fyne report soon
-
+cd ~ && git clone https://github.com/fyne-io/fyne.git && cd fyne && git checkout develop && cd cmd/fyne && go build && chmod 1777 fyne && mv fyne /data/data/com.termux/files/home/go/bin/
 
 echo '================================================================'
 echo '                                 complete'
