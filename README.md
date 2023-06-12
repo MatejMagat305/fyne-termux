@@ -8,7 +8,7 @@ script provide 4 options
 - light version NDK, which provide only headers and tools which are nesessery to library fyne and build to arm64 (on termux you can build only for arm64 devices) 
 - with SDK, which is useless when you don't plan compile other projects
 - without SDK - fyne don't need SDK tools
--  
+
 # requirements
 - more than free 4.1GB on storage (for full version and sdk - witout sdk and with minimal version aprox. 2.3GB is needed)
 - arm64 - aarch64 (unfortunately on arm32 doesn't exist ndk)
