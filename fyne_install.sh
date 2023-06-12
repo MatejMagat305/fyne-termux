@@ -13,29 +13,52 @@ if (version < 9) then
 	echo 'unfortunately anroid must be 9 or above'
 	exit 1
 fi
+full=1;sdk=0;
+while true; do
+    read -p "Do you wish to install full NDK?(Y - full ndk / N - light version for apk only for arm64)" yn
+    case $yn in
+        [Yy]* ) full=1; break;;
+        [Nn]* ) full=0; break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
+while true; do
+    read -p "Do you wish to install SDK? It is for re-compile java for beginer useless (y/n)" yn
+    case $yn in
+        [Yy]* ) sdk=1; break;;
+        [Nn]* ) sdk=0; break;;
+        * ) echo "Please answer yes or no.";;
+    esac
+done
+
 echo '================================================================'
 echo '                     install dependencies'
 echo '================================================================'
 pkg update && pkg upgrade && pkg install aapt apksigner dx ecj openjdk-17 git wget
 
-echo '================================================================'
-echo '                     download sdk.zip'
-echo '================================================================'
-cd ~ && wget https://github.com/Lzhiyong/termux-ndk/releases/download/android-sdk/android-sdk-aarch64.zip
-echo '================================================================'
-echo '                               unzip sdk.zip'
-echo '================================================================'
-cd ~ && unzip -qq android-sdk-aarch64.zip
-echo '================================================================'
-echo '                              tidy sdk.zip'
-echo '================================================================'
-cd ~ && rm android-sdk-aarch64.zip
-
+if [ $sdk == 1 ]; then
+  echo '================================================================'
+  echo '                     download sdk.zip'
+  echo '================================================================'
+  cd ~ && wget https://github.com/Lzhiyong/termux-ndk/releases/download/android-sdk/android-sdk-aarch64.zip
+  echo '================================================================'
+  echo '                               unzip sdk.zip'
+  echo '================================================================'
+  cd ~ && unzip -qq android-sdk-aarch64.zip
+  echo '================================================================'
+  echo '                              tidy sdk.zip'
+  echo '================================================================'
+  cd ~ && rm android-sdk-aarch64.zip
+fi
 echo '================================================================'
 echo '                     download ndk.zip'
 echo '================================================================'
-cd ~ && wget https://github.com/Lzhiyong/termux-ndk/releases/download/ndk-r23/android-ndk-r23c-aarch64.zip
-
+if [ $full == 1] then 
+  cd ~ && wget https://github.com/Lzhiyong/termux-ndk/releases/download/ndk-r23/android-ndk-r23c-aarch64.zip
+else
+  cd ~ && wget https://github.com/MatejMagat305/termux-ndk/releases/download/release/android-ndk-r23c-aarch64.zip
+fi
 echo '================================================================'
 echo '                               unzip ndk.zip'
 echo '================================================================'
@@ -53,16 +76,11 @@ cd ~ && rm android-ndk-r23c-aarch64.zip
 echo '================================================================'
 echo '                               set env variables'
 echo '================================================================'
-echo 'export ANDROID_HOME=/data/data/com.termux/files/home/android-sdk/' >> ~/../usr/etc/profile
+if [ $sdk == 1] then 
+  echo 'export ANDROID_HOME=/data/data/com.termux/files/home/android-sdk/' >> ~/../usr/etc/profile
+fi
 echo 'export ANDROID_NDK_HOME=/data/data/com.termux/files/home/android-ndk-r23c/' >> ~/../usr/etc/profile
 echo 'export ANDROID_NDK_ROOT=$ANDROID_NDK_HOME' >> ~/../usr/etc/profile
-
-
-echo '================================================================'
-echo '                               resolving versions'
-echo '================================================================'
-/data/data/com.termux/files/home/android-sdk/tools/bin/sdkmanager --sdk_root=/data/data/com.termux/files/home/android-sdk/ --uninstall "platforms;android-33"
-/data/data/com.termux/files/home/android-sdk/tools/bin/sdkmanager --sdk_root=/data/data/com.termux/files/home/android-sdk/ --uninstall "platforms;android-32"
 
 
 echo '================================================================'
@@ -82,3 +100,8 @@ echo '                                 complete'
 echo '================================================================'
 echo ''
 echo 'put "source ~/../usr/etc/profile"'
+if [ $full == 1] then 
+  echo 'you can put "fyne package -os andoid -icon some_icon_name -name some_name -release -appID some_package_name" in fyne project'
+else
+  echo 'you can put "fyne package -os andoid/arm64 -icon some_icon_name -name some_name -release -appID some_package_name" in fyne project'
+fi
