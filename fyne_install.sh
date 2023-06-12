@@ -9,13 +9,13 @@ case $(uname -m) in
 esac
 s_version=$(termux-info | grep -A1 "Android version" | grep -Po "\\d+")
 version=$(($s_version+0))
-if (version < 9) then
+if (( $version < 9 )) then
 	echo 'unfortunately anroid must be 9 or above'
 	exit 1
 fi
 full=1;sdk=0;
 while true; do
-    read -p "Do you wish to install full NDK?(Y - full ndk / N - light version for apk only for arm64)" yn
+    read -p "Full ndk contain all headers and resources and light version contain only header which are nesessery for library fyne to build apk or arm. \n Do you wish to install full NDK? (y/n): " yn
     case $yn in
         [Yy]* ) full=1; break;;
         [Nn]* ) full=0; break;;
@@ -24,7 +24,7 @@ while true; do
 done
 
 while true; do
-    read -p "Do you wish to install SDK? It is for re-compile java for beginer useless (y/n)" yn
+    read -p "Do you wish to install SDK? It is for re-compile java for beginer useless (y/n): " yn
     case $yn in
         [Yy]* ) sdk=1; break;;
         [Nn]* ) sdk=0; break;;
@@ -54,7 +54,7 @@ fi
 echo '================================================================'
 echo '                     download ndk.zip'
 echo '================================================================'
-if [ $full == 1] then 
+if [ $full == 1 ]; then 
   cd ~ && wget https://github.com/Lzhiyong/termux-ndk/releases/download/ndk-r23/android-ndk-r23c-aarch64.zip
 else
   cd ~ && wget https://github.com/MatejMagat305/termux-ndk/releases/download/release/android-ndk-r23c-aarch64.zip
@@ -76,7 +76,7 @@ cd ~ && rm android-ndk-r23c-aarch64.zip
 echo '================================================================'
 echo '                               set env variables'
 echo '================================================================'
-if [ $sdk == 1] then 
+if [ $sdk == 1 ]; then 
   echo 'export ANDROID_HOME=/data/data/com.termux/files/home/android-sdk/' >> ~/../usr/etc/profile
 fi
 echo 'export ANDROID_NDK_HOME=/data/data/com.termux/files/home/android-ndk-r23c/' >> ~/../usr/etc/profile
@@ -100,8 +100,8 @@ echo '                                 complete'
 echo '================================================================'
 echo ''
 echo 'put "source ~/../usr/etc/profile"'
-if [ $full == 1] then 
-  echo 'you can put "fyne package -os andoid -icon some_icon_name -name some_name -release -appID some_package_name" in fyne project'
+if [ $full == 1 ]; then 
+  echo 'you can put "fyne package -os android -icon some_icon_name -name some_name -release -appID some_package_name" in fyne project'
 else
-  echo 'you can put "fyne package -os andoid/arm64 -icon some_icon_name -name some_name -release -appID some_package_name" in fyne project'
+  echo 'you can put "fyne package -os android/arm64 -icon some_icon_name -name some_name -release -appID some_package_name" in fyne project'
 fi
