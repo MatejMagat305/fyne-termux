@@ -55,14 +55,14 @@ echo '================================================================'
 echo '                     download ndk.zip'
 echo '================================================================'
 if [ $full == 1 ]; then 
-  cd ~ && wget https://github.com/Lzhiyong/termux-ndk/releases/download/ndk-r23/android-ndk-r23c-aarch64.zip
+  cd ~ && wget https://github.com/lzhiyong/termux-ndk/releases/download/android-ndk/android-ndk-r26b-aarch64.zip
 else
-  cd ~ && wget https://github.com/MatejMagat305/termux-ndk/releases/download/release/android-ndk-r23c-aarch64.zip
+  cd ~ && wget https://github.com/MatejMagat305/termux-ndk/releases/download/release/android-ndk-r26b-aarch64.zip
 fi
 echo '================================================================'
 echo '                               unzip ndk.zip'
 echo '================================================================'
-cd ~ && unzip -qq android-ndk-r23c-aarch64.zip
+cd ~ && unzip -qq android-ndk-r26b-aarch64.zip
 echo '================================================================'
 echo '                               fix sh in ndk path'
 echo '================================================================'
