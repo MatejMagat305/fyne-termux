@@ -1,4 +1,5 @@
 #!/data/data/com.termux/files/usr/bin/bash
+#edited by gpt chat
 
 # ================== Check architecture and Android version ==================
 echo '================ Checking architecture and Android version =================='
