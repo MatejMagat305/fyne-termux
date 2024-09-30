@@ -74,15 +74,15 @@ echo '================================================================'
 echo '                     Downloading NDK'
 echo '================================================================'
 if [ $FULL_NDK -eq 1 ]; then
-    wget https://github.com/lzhiyong/termux-ndk/releases/download/android-ndk/android-ndk-r27b-aarch64.zip
+    cd ~ && wget https://github.com/lzhiyong/termux-ndk/releases/download/android-ndk/android-ndk-r27b-aarch64.zip
 else
-    wget https://github.com/MatejMagat305/termux-ndk/releases/download/release/android-ndk-r23c-aarch64.zip
+    cd ~ && wget https://github.com/MatejMagat305/termux-ndk/releases/download/release/android-ndk-r23c-aarch64.zip
 fi
 
 echo '================================================================'
 echo '                     Unzipping NDK'
 echo '================================================================'
-unzip -qq android-ndk-r27b-aarch64.zip && rm android-ndk-r27b-aarch64.zip
+cd ~ && unzip -qq android-ndk-r27b-aarch64.zip && rm android-ndk-r27b-aarch64.zip
 
 # ================== Fixing shebang in NDK path ==================
 echo '================================================================'
