@@ -1,3 +1,5 @@
+# warning: this was moved to https://github.com/termux-ndk-lab/termux-setup-ndk
+
 # fyne-termux
 Script for easy fetch ndk (, sdk) and fyne: https://github.com/fyne-io/fyne
 And compile easy apk on termux
